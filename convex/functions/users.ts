@@ -1,6 +1,6 @@
 import { v } from "convex/values";
-import { query, mutation, action } from "./_generated/server";
-import { api } from "./_generated/api";
+import { query, mutation, action } from "../_generated/server";
+import { api } from "../_generated/api";
 
 /**
  * Insert or update the user in a Convex table then return the document's ID.
@@ -21,7 +21,7 @@ export const store = mutation({
       if (!identity) {
         throw new Error("Called storeUser without authentication present");
       }
-  
+      
       // Check if we've already stored this identity before.
       const user = await ctx.db
         .query("users")
@@ -41,10 +41,6 @@ export const store = mutation({
         name: identity.name!,
         tokenIdentifier: identity.tokenIdentifier,
         email: identity.email!,
-        linkedin: "",
-        description: "",
-        isTechnical: false,
-        isAvailable: true,
       });
     },
   });
